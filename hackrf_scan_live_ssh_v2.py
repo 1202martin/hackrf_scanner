@@ -43,7 +43,6 @@ class Scanner:
     def rf_sweep_start_end(self, min_freq, max_freq, bin):
         parsed_rf = []
         sig_str_info = []
-        signal_timestamps = []
         rf_scan = subprocess.check_output(['hackrf_sweep', '-1', '-f %d:%d'%(min_freq,max_freq), '-w %d'%(bin*1000000),'/dev/null'],stderr=subprocess.DEVNULL)
         # rf_scan = subprocess.check_output(['hackrf_sweep -1 -f %d:%d -w %d /dev/null'%(min_freq,max_freq,bin*1000000)],stderr=subprocess.DEVNULL)
         rf_scan = rf_scan.decode('utf-8')
@@ -157,7 +156,6 @@ class Scanner:
 
         table_names = ["full_range_scan","433_scan","915_scan","2400_scan","5000_scan"]
 
-        
         #When updating full_range
         if freq_range == 0:
             #Check if full_range_scan table exists
@@ -354,18 +352,14 @@ class Scanner:
             self.update_db(self, SSH_CONFIG, DB_CONFIG, [freq_info], init_flag)
             print("Elapase : ", time.time()-startTime)
 
-    def freq_scan_start_end(self, SSH_CONFIG, DB_CONFIG, min_freq, max_freq, freq_range, init_flag):
+    def freq_scan_start_end(self, SSH_CONFIG, DB_CONFIG, min_freq, max_freq, bin_size, freq_range, init_flag):
         #This function continuosly scans the selected frequency range && updates this data to the local DB
         #This function triggers both the frequency scan function along with the db update function.
 
         self.scan_flag = True
-        if freq_range == 0:
-            bin = 1
-        else:
-            bin = (max_freq-min_freq)/5000
         while self.scan_flag:
             start_time = time.time()
-            freq_info = self.rf_sweep_start_end(self,min_freq,max_freq,bin)
+            freq_info = self.rf_sweep_start_end(self,min_freq,max_freq,bin_size)
             self.update_db(self, SSH_CONFIG, DB_CONFIG, [freq_info], freq_range, init_flag)
             print("elapse: ", time.time()-start_time)
             if init_flag == 1:
