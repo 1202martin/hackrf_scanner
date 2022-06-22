@@ -35,7 +35,7 @@ class use433(Resource):
         print("433")
         Scanner.scan_flag = False
         time.sleep(1)
-        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG, DB_CONFIG, 413, 453, 1, 0)
+        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG, DB_CONFIG, 413, 453, 0)
 
 @api.route('/915')  
 class use915(Resource):
@@ -44,7 +44,7 @@ class use915(Resource):
         print("915")
         Scanner.scan_flag = False
         time.sleep(1)
-        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG, 895, 935, 1, 0)
+        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG, 895, 935, 0)
 
 @api.route('/2400')  
 class use2400(Resource):
@@ -53,7 +53,7 @@ class use2400(Resource):
         print("2400")
         Scanner.scan_flag = False
         time.sleep(1)
-        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG, 2380, 2420, 1, 0)
+        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG, 2380, 2420, 0)
 
 @api.route('/5000')  
 class use5000(Resource):
@@ -62,7 +62,7 @@ class use5000(Resource):
         print("5000")
         Scanner.scan_flag = False
         time.sleep(1)
-        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG, 4980, 5020, 1, 0)
+        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG, 4980, 5020, 0)
 
 @api.route('/all')
 class useAll(Resource):
@@ -71,7 +71,7 @@ class useAll(Resource):
         print('all')
         Scanner.scan_flag = False
         time.sleep(1)
-        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG,413, 5020, 1, 0)
+        Scanner.freq_scan_start_end(Scanner, SSH_CONFIG,DB_CONFIG,413, 5020, 0)
 
 if __name__ == "__main__":
     

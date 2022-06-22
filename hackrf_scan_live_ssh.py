@@ -210,7 +210,7 @@ class Scanner:
             if self.scan_flag == False:
                 break
 
-    def freq_scan_start_end(self, SSH_CONFIG, DB_CONFIG, min_freq, max_freq, bin, init_flag):
+    def freq_scan_start_end(self, SSH_CONFIG, DB_CONFIG, min_freq, max_freq, init_flag):
         #This function continuosly scans the selected frequency range && updates this data to the local DB
         #This function triggers both the frequency scan function along with the db update function.
 
@@ -218,6 +218,7 @@ class Scanner:
 
         while self.scan_flag:
             start_time = time.time()
+            bin = (max_freq-min_freq)//5000
             freq_info = self.rf_sweep_start_end(self,min_freq,max_freq,bin)
             self.update_db(self, SSH_CONFIG, DB_CONFIG, [freq_info], init_flag)
             print("elapse: ", time.time()-start_time)
